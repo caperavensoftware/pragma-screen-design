@@ -16,9 +16,12 @@
     "registry": "npm",
     "dependencies": {
       "aurelia-bootstrapper": "^2.1.1",
+      "aurelia-event-aggregator": "^1.0.1",
       "aurelia-framework": "^1.1.2",
       "aurelia-pal-browser": "^1.2.1",
-      "pragma-views": "^0.0.47"
+      "pixi.js": "^4.5.3",
+      "pragma-tabsheet": "^1.0.23",
+      "pragma-views": "^0.0.51"
     },
     "devDependencies": {}
   },
