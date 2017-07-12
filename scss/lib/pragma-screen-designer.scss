@@ -26,4 +26,47 @@ pragma-screen-designer {
 
     @include no-mouse();
   }
+  @include flex();
+  @include flex-column();
+  @include fullsize();
+
+  .options-toolbar {
+    height: $app-toolbar-height;
+    background: $toolbar-background;
+
+    @include flex();
+    @include flex-row();
+    align-items: center;
+  }
+
+  .design-panel {
+    @include stretch();
+
+    display: block;
+    overflow-y: auto;
+  }
+
+  .selection-layer {
+    display: block;
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    @include no-mouse();
+  }
+
+  input-composite *, input[type="checkbox"] {
+    @include no-mouse();
+  }
+
+  .group {
+    header {
+      @include no-mouse();
+    }
+  }
+
+  .group, .group-header, input-composite  {
+    cursor: pointer;
+  }
 }
