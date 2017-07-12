@@ -4,12 +4,9 @@ export function configure(aurelia) {
             .standardConfiguration()
             .developmentLogging()
             .globalResources(
-                'pragma-views/components/input-composite/input-composite',
-                'pragma-views/components/icons/icons.html',
-                'pragma-views/components/icons/icon.html',
-                'pragma-views/components/group/group'
+                'components/pragma-screen-designer/pragma-screen-designer'
             )
-            .plugin();
+            .plugin('pragma-views', builder => builder.useAll());
 
         aurelia.start().then(() => {
             aurelia.setRoot();
