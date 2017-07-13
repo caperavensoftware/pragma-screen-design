@@ -5,7 +5,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {BodyDesigner} from './lib/designers/body-designer';
 import {TabsheetDesigner} from './lib/designers/tabsheet-designer';
 import {TabDesigner} from './lib/designers/tab-designer';
-import {TabBodyDesigner} from './lib/designers/tab-body';
+import {TabBodyDesigner} from './lib/designers/tab-body-designer';
 import {GroupDesginer} from './lib/designers/group-designer';
 
 import {InputListener, inputEventType} from 'pragma-views';

@@ -45,10 +45,25 @@ export class TabDesigner extends DesignerBase {
     }
 
     moveLeft() {
-        console.log("move left");
+        this.moveTab(-1);
     }
 
     moveRight() {
-        console.log("move right");
+        this.moveTab(1);
+    }
+
+    moveTab(direction) {
+        const children = Array.from(this.element.parentElement.children);
+        const currentIndex = children.indexOf(this.element);
+        const nextIndex = currentIndex + direction;
+
+        const canMove = (direction == -1 && nextIndex > -1) || (direction == 1 && nextIndex < children.length);
+
+        if (canMove) {
+            this.eventAggregator.publish('moveTab', {
+                fromIndex: currentIndex,
+                toIndex: nextIndex,
+            })
+        }
     }
 }
