@@ -1,6 +1,6 @@
 import {DesignerBase} from "./../designer-base";
 import template from './../../assistant/group.html!text';
-import {getInnerText, setInnerText, getParentGroupElement} from './../dom-helper';
+import {getInnerText, setInnerText, getParentElemet} from './../dom-helper';
 
 export class GroupDesginer extends DesignerBase {
     title;
@@ -8,7 +8,7 @@ export class GroupDesginer extends DesignerBase {
     constructor(element, eventAggregator, templateEngine, bindingEngine) {
         super(element, eventAggregator, templateEngine, bindingEngine);
 
-        this.element = getParentGroupElement(this.element);
+        this.element = getParentElemet(this.element, ".group");
 
         this.loadTemplate(template, this);
         this.initializeObserver();

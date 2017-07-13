@@ -14,7 +14,8 @@ export function getDesignerKey(element) {
     }
 
     if (element.tagName.toLowerCase() == 'pragma-tabsheet') {
-        return "tabbody";
+        const length = element.querySelectorAll(".tabsheet-bar-item").length;
+        return length > 0 ? "tabbody" : 'tabsheet';
     }
 
     if (element.classList.contains('group')) {

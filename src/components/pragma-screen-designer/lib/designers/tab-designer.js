@@ -1,5 +1,6 @@
 import {DesignerBase} from "./../designer-base";
 import template from './../../assistant/tab.html!text';
+import {getParentElemet} from './../dom-helper';
 
 export class TabDesigner extends DesignerBase {
     title;
@@ -32,7 +33,13 @@ export class TabDesigner extends DesignerBase {
     }
 
     delete() {
-        console.log("delete");
+        const parentId = getParentElemet(this.element, "pragma-tabsheet").id;
+        const id = this.element.getAttribute("for");
+
+        this.eventAggregator.publish('removeTab', {
+            id: parentId,
+            tabId: id
+        })
     }
 
     moveLeft() {

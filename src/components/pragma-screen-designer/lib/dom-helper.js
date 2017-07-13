@@ -52,14 +52,14 @@ export function getInnerText(element, query) {
     return "";
 }
 
-export function getParentGroupElement(element) {
+export function getParentElemet(element, query) {
     if (!element) {
         return null;
     }
 
-    if (element.classList.contains("group")) {
+    if (element.matches(query)) {
         return element;
     }
 
-    return getParentGroupElement(element.parentElement);
+    return getParentElemet(element.parentElement, query);
 }
