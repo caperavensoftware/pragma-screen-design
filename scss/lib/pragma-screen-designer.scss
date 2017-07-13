@@ -4,12 +4,12 @@ pragma-screen-designer {
   width: 100%;
   height: 100%;
 
-  .main-toolbar {
+  .designer-main-toolbar {
     width: 100%;
     height: $app-toolbar-height;
   }
 
-  .body {
+  .designer-body {
     position: absolute;
     top: $app-toolbar-height;
     bottom: 0;

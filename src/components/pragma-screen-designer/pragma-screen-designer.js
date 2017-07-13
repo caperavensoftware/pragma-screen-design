@@ -1,30 +1,50 @@
 import {customElement, inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {BodyDesigner} from './lib/body-designer';
+import {BodyDesigner} from './lib/designers/body-designer';
+import {TabsheetDesigner} from './lib/designers/tabsheet-designer';
+import {TabDesigner} from './lib/designers/tab-designer';
 import {TemplatingEngine} from 'aurelia-templating';
-import {InputListener} from 'pragma-views';
+import {InputListener, inputEventType} from 'pragma-views';
+import {getDesignerKey} from './pragma-designer-keys';
+import {BindingEngine} from 'aurelia-binding';
 
 @customElement('pragma-screen-designer')
-@inject(Element, EventAggregator, TemplatingEngine, InputListener)
+@inject(Element, EventAggregator, TemplatingEngine, InputListener, BindingEngine)
 export class PragmaScreenDesigner {
     currentDesigner;
 
-    constructor(element, eventAggregator, templatingEngine, inputListener) {
+    constructor(element, eventAggregator, templatingEngine, inputListener, bindingEngine) {
         this.element = element;
+        this.element.id = "designer";
         this.eventAggregator = eventAggregator;
         this.templatingEngine = templatingEngine;
         this.inputListener = inputListener;
+        this.bindingEngine = bindingEngine;
+
+        console.log(this.bindingEngine);
     }
 
     attached() {
         this.desginerMap = new Map([
-            ["body", BodyDesigner]
+            ["body", BodyDesigner],
+            ["tabsheet", TabsheetDesigner],
+            ["tab", TabDesigner]
         ]);
 
-        this.showDesignerForElement(this.element.querySelector(".body"));
+        this.showDesignerForElement(this.element.querySelector(".designer-body"));
+
+        this.selectElementHandler = this.selectElement.bind(this);
+        this.inputListener.addEvent(
+            this.element,
+            inputEventType.click,
+            this.selectElementHandler,
+            true);
     }
 
     detached() {
+        this.inputListener.removeEvent(this.element, inputEventType.click);
+        this.selectElementHandler = null;
+
         this.desginerMap.clear();
 
         if (this.currentDesigner) {
@@ -33,11 +53,15 @@ export class PragmaScreenDesigner {
     }
 
     showDesignerForElement(element) {
-        if (!element.dataset || !element.dataset.designer) {
-            return;
+        if (!element) {
+            return null;
         }
 
-        const key = element.dataset.designer;
+        const key = getDesignerKey(element);
+
+        if (!key) {
+            return;
+        }
 
         if (this.desginerMap.has(key)) {
             if (this.currentDesigner) {
@@ -45,8 +69,12 @@ export class PragmaScreenDesigner {
             }
 
             const type = this.desginerMap.get(key);
-            this.currentDesigner = new type(element, this.eventAggregator, this.templatingEngine);
+            this.currentDesigner = new type(element, this.eventAggregator, this.templatingEngine, this.bindingEngine);
         }
+    }
+
+    selectElement(event) {
+        this.showDesignerForElement(event.target);
     }
 
 }

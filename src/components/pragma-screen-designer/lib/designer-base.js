@@ -1,8 +1,9 @@
 export class DesignerBase {
-    constructor(element, eventAggregator, templateEngine) {
+    constructor(element, eventAggregator, templateEngine, bindingEngine) {
         this.element = element;
         this.eventAggregator = eventAggregator;
         this.templateEngine = templateEngine;
+        this.bindingEngine = bindingEngine;
     }
 
     dispose() {
