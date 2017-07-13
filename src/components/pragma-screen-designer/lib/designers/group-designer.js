@@ -22,7 +22,7 @@ export class GroupDesginer extends DesignerBase {
             .propertyObserver(this, 'title')
             .subscribe(this.titleChangedHandler);
 
-        this.title = getInnerText(this.element, "h2");
+        this.title = this.element.parentElement.getAttribute("title");
     }
 
     dispose() {
@@ -34,7 +34,8 @@ export class GroupDesginer extends DesignerBase {
     }
 
     titleChanged(newValue) {
-        setInnerText(this.element, 'h2', newValue);
+        this.element.parentElement.setAttribute("title", newValue);
+        setInnerText(this.element, 'h3', newValue);
     }
 
     delete() {

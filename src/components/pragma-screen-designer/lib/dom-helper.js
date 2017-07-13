@@ -14,9 +14,7 @@ export function createTabsheetElement(element) {
 }
 
 export function createGroupElement() {
-    const groupHeader = createElement("h2", null, "Group");
-    const group = createElement("div", null, null, ["group"], groupHeader);
-    return group;
+    return createElement("group", {"title": "Group", "expanded": true});
 }
 
 export function getSelectedTabsheetBody(element) {
