@@ -33,9 +33,7 @@ export class DesignerBase {
     enhance(element, context) {
         this.templateEngine.enhance({
             element: element,
-            bindingContext: {
-                viewModel: context
-            }
+            bindingContext: context
         });
     }
 }

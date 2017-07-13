@@ -1,25 +1,21 @@
 export function createTabsheetElement(element) {
     const count = element.querySelectorAll("pragma-tabsheet").length;
 
-    const tab = document.createElement("div");
-    tab.id = "tab1";
-    tab.setAttribute("data-tab", "New Tab");
+    const tab = createElement("div", {
+        "id": "tab1",
+        "data-tab": "New Tab"
+    });
 
-    const tabsheet = document.createElement("pragma-tabsheet");
-    tabsheet.id = `tabsheet${count + 1}`;
-    tabsheet.appendChild(tab);
+    const tabsheet = createElement("pragma-tabsheet", {
+        "id": `tabsheet${count + 1}`
+    }, null, null, tab);
 
     return tabsheet;
 }
 
 export function createGroupElement() {
-    const groupHeader = document.createElement("h2");
-    groupHeader.innerText = "Group";
-
-    const group = document.createElement("div");
-    group.classList.add("group");
-    group.appendChild(groupHeader);
-
+    const groupHeader = createElement("h2", null, "Group");
+    const group = createElement("div", null, null, ["group"], groupHeader);
     return group;
 }
 
@@ -82,4 +78,53 @@ export function moveElementOnParent(currentIndex, nextIndex, parent) {
         parent.insertBefore(nextElement, currentElement)
     }
 
+}
+
+export function createInputComposite() {
+    const input = createElement("input", {
+        "type": "text",
+        "value.bind": "code"
+    });
+
+    const composite = createElement("input-composite", {
+        "label.bind": "label",
+        "descriptor.bind": "description"
+    }, null, null, input);
+
+    return composite;
+}
+
+export function createElement(type, attributes, innerText, classes, children) {
+    const element = document.createElement(type);
+
+    if (attributes) {
+        const keys = Object.keys(attributes);
+        for (let key of keys) {
+            element.setAttribute(key, attributes[key]);
+        }
+    }
+
+    if (innerText) {
+        element.innerText = innerText;
+    }
+
+    if (classes) {
+        for (let c of classes) {
+            element.classList.add(c);
+        }
+    }
+
+    if (children) {
+        if (Array.isArray(children)) {
+            for (let child of children) {
+                element.appendChild(child);
+            }
+        }
+        else
+        {
+            element.appendChild(children);
+        }
+    }
+
+    return element;
 }
