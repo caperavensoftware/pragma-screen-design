@@ -63,3 +63,23 @@ export function getParentElemet(element, query) {
 
     return getParentElemet(element.parentElement, query);
 }
+
+export function moveElement(currentIndex, nextIndex, parent) {
+    const children = Array.from(parent.children);
+
+    if (nextIndex > children.length - 1 || nextIndex < 0) {
+        return;
+    }
+
+    const currentElement = children[currentIndex];
+    const nextElement = children[nextIndex];
+
+    if (currentIndex > nextIndex) {
+        parent.insertBefore(currentElement, nextElement);
+    }
+    else
+    {
+        parent.insertBefore(nextElement, currentElement)
+    }
+
+}

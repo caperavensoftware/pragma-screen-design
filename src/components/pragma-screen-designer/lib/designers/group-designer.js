@@ -1,6 +1,6 @@
 import {DesignerBase} from "./../designer-base";
 import template from './../../assistant/group.html!text';
-import {getInnerText, setInnerText, getParentElemet} from './../dom-helper';
+import {getInnerText, setInnerText, getParentElemet, moveElement} from './../dom-helper';
 
 export class GroupDesginer extends DesignerBase {
     title;
@@ -42,10 +42,18 @@ export class GroupDesginer extends DesignerBase {
     }
 
     moveUp() {
-        console.log("delete");
+        this.moveGroup(-1);
     }
 
     moveDown() {
-        console.log("delete");
+        this.moveGroup(1);
+    }
+
+    moveGroup(direction) {
+        const children = Array.from(this.element.parentElement.children);
+        const currentIndex = children.indexOf(this.element);
+        const nextIndex = currentIndex + direction;
+
+        moveElement(currentIndex, nextIndex, this.element.parentElement);
     }
 }
