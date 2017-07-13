@@ -39,7 +39,9 @@ export class TabDesigner extends DesignerBase {
         this.eventAggregator.publish('removeTab', {
             id: parentId,
             tabId: id
-        })
+        });
+
+        this.unload();
     }
 
     moveLeft() {

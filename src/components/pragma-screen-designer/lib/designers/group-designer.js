@@ -37,7 +37,8 @@ export class GroupDesginer extends DesignerBase {
     }
 
     delete() {
-        console.log("delete");
+        this.element.parentElement.removeChild(this.element);
+        this.unload();
     }
 
     moveUp() {
