@@ -64,7 +64,7 @@ export function getParentElemet(element, query) {
     return getParentElemet(element.parentElement, query);
 }
 
-export function moveElement(currentIndex, nextIndex, parent) {
+export function moveElementOnParent(currentIndex, nextIndex, parent) {
     const children = Array.from(parent.children);
 
     if (nextIndex > children.length - 1 || nextIndex < 0) {

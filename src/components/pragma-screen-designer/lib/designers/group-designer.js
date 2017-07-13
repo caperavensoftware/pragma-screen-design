@@ -1,6 +1,6 @@
 import {DesignerBase} from "./../designer-base";
 import template from './../../assistant/group.html!text';
-import {getInnerText, setInnerText, getParentElemet, moveElement} from './../dom-helper';
+import {getInnerText, setInnerText, getParentElemet, moveElementOnParent} from './../dom-helper';
 
 export class GroupDesginer extends DesignerBase {
     title;
@@ -54,6 +54,6 @@ export class GroupDesginer extends DesignerBase {
         const currentIndex = children.indexOf(this.element);
         const nextIndex = currentIndex + direction;
 
-        moveElement(currentIndex, nextIndex, this.element.parentElement);
+        moveElementOnParent(currentIndex, nextIndex, this.element.parentElement);
     }
 }
