@@ -1,5 +1,6 @@
 import {DesignerBase} from "./../designer-base";
 import template from './../../assistant/body.html!text';
+import {createTabsheetElement, createGroupElement} from './../dom-helper';
 
 export class BodyDesigner extends DesignerBase {
     hasTabsheet;
@@ -22,17 +23,14 @@ export class BodyDesigner extends DesignerBase {
     }
 
     addTabsheet() {
-        const count = this.element.querySelectorAll("pragma-tabsheet").length;
-
-        const tab = document.createElement("div");
-        tab.id = "tab1";
-        tab.setAttribute("data-tab", "New Tab");
-
-        const tabsheet = document.createElement("pragma-tabsheet");
-        tabsheet.id = `tabsheet${count + 1}`;
-        tabsheet.appendChild(tab);
+        const tabsheet = createTabsheetElement(this.element);
 
         this.addChildElement(tabsheet, this);
         this.hasTabsheet = true;
+    }
+
+    addGroup() {
+        const group = createGroupElement();
+        this.addChildElement(group, this);
     }
 }

@@ -13,5 +13,9 @@ export function getDesignerKey(element) {
         return "tab";
     }
 
+    if (element.tagName.toLowerCase() == "pragma-tabsheet") {
+        return "tabbody";
+    }
+
     return null;
 }

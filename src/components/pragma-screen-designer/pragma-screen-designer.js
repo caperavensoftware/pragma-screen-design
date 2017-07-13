@@ -3,6 +3,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {BodyDesigner} from './lib/designers/body-designer';
 import {TabsheetDesigner} from './lib/designers/tabsheet-designer';
 import {TabDesigner} from './lib/designers/tab-designer';
+import {TabBodyDesigner} from './lib/designers/tab-body';
 import {TemplatingEngine} from 'aurelia-templating';
 import {InputListener, inputEventType} from 'pragma-views';
 import {getDesignerKey} from './pragma-designer-keys';
@@ -20,15 +21,14 @@ export class PragmaScreenDesigner {
         this.templatingEngine = templatingEngine;
         this.inputListener = inputListener;
         this.bindingEngine = bindingEngine;
-
-        console.log(this.bindingEngine);
     }
 
     attached() {
         this.desginerMap = new Map([
             ["body", BodyDesigner],
             ["tabsheet", TabsheetDesigner],
-            ["tab", TabDesigner]
+            ["tab", TabDesigner],
+            ["tabbody", TabBodyDesigner]
         ]);
 
         this.showDesignerForElement(this.element.querySelector(".designer-body"));

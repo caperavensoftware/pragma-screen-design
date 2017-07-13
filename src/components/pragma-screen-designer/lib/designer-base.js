@@ -27,7 +27,10 @@ export class DesignerBase {
 
     addChildElement(element, context) {
         this.element.appendChild(element);
+        this.enhance(element, context);
+    }
 
+    enhance(element, context) {
         this.templateEngine.enhance({
             element: element,
             bindingContext: {
@@ -35,5 +38,4 @@ export class DesignerBase {
             }
         });
     }
-
 }
