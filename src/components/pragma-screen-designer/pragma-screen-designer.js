@@ -1,10 +1,13 @@
 import {customElement, inject} from 'aurelia-framework';
+import {TemplatingEngine} from 'aurelia-templating';
 import {EventAggregator} from 'aurelia-event-aggregator';
+
 import {BodyDesigner} from './lib/designers/body-designer';
 import {TabsheetDesigner} from './lib/designers/tabsheet-designer';
 import {TabDesigner} from './lib/designers/tab-designer';
 import {TabBodyDesigner} from './lib/designers/tab-body';
-import {TemplatingEngine} from 'aurelia-templating';
+import {GroupDesginer} from './lib/designers/group-designer';
+
 import {InputListener, inputEventType} from 'pragma-views';
 import {getDesignerKey} from './pragma-designer-keys';
 import {BindingEngine} from 'aurelia-binding';
@@ -28,7 +31,8 @@ export class PragmaScreenDesigner {
             ["body", BodyDesigner],
             ["tabsheet", TabsheetDesigner],
             ["tab", TabDesigner],
-            ["tabbody", TabBodyDesigner]
+            ["tabbody", TabBodyDesigner],
+            ["group", GroupDesginer]
         ]);
 
         this.showDesignerForElement(this.element.querySelector(".designer-body"));

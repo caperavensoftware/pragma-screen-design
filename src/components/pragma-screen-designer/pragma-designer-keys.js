@@ -13,8 +13,16 @@ export function getDesignerKey(element) {
         return "tab";
     }
 
-    if (element.tagName.toLowerCase() == "pragma-tabsheet") {
+    if (element.tagName.toLowerCase() == 'pragma-tabsheet') {
         return "tabbody";
+    }
+
+    if (element.classList.contains('group')) {
+        return 'group';
+    }
+
+    if (element.tagName.toLowerCase() == "h2") {
+        return element.parentElement.classList.contains('group') ? 'group' : 'title'
     }
 
     return null;

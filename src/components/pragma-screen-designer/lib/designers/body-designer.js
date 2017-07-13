@@ -13,7 +13,6 @@ export class BodyDesigner extends DesignerBase {
     }
 
     dispose() {
-        this.unload();
         super.dispose();
     }
 

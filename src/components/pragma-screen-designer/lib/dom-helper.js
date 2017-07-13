@@ -33,3 +33,33 @@ export function getSelectedTabsheetBody(element) {
     const target = element.querySelector(`#${tabId}`);
     return target;
 }
+
+export function setInnerText(element, query, text) {
+    const eToChange = element.querySelector(query);
+
+    if (eToChange) {
+        eToChange.innerText = text;
+    }
+}
+
+export function getInnerText(element, query) {
+    const eToCheck = element.querySelector(query);
+
+    if (eToCheck) {
+        return eToCheck.innerText;
+    }
+
+    return "";
+}
+
+export function getParentGroupElement(element) {
+    if (!element) {
+        return null;
+    }
+
+    if (element.classList.contains("group")) {
+        return element;
+    }
+
+    return getParentGroupElement(element.parentElement);
+}

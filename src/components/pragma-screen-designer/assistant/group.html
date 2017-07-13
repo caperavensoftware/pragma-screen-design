@@ -1,0 +1,11 @@
+<template>
+    <div class="group assist-container">
+        <h2>Group</h2>
+        <input type="text" value.bind="title"/>
+
+        <hr/>
+        <button click.delegate="delete()" disabled.bind="hasTabsheet">Delete</button>
+        <button click.delegate="moveUp()" disabled.bind="hasTabsheet">Move Up</button>
+        <button click.delegate="moveDown()" disabled.bind="hasTabsheet">Move Down</button>
+    </div>
+</template>
