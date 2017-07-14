@@ -59,11 +59,19 @@ export class GroupDesginer extends DesignerBase {
         const nextIndex = currentIndex + direction;
 
         moveElementOnParent(currentIndex, nextIndex, group.parentElement);
+
+        requestAnimationFrame(_ => {
+            this.eventAggregator.publish("design-highlight", this.element);
+        });
     }
 
     addField() {
         const input = createInputComposite();
         const context = createInputContext();
         this.addChildElement(input, context);
+
+        requestAnimationFrame(_ => {
+            this.eventAggregator.publish("design-highlight", this.element);
+        });
     }
 }

@@ -70,3 +70,20 @@ pragma-screen-designer {
     cursor: pointer;
   }
 }
+
+.designer-highlight {
+  --left: 0;
+  --top: 0;
+  --width: 0;
+  --height: 0;
+
+  border-width: 1px;
+  border-color: #35C184;
+  border-style: dotted;
+
+  position: absolute;
+  left: calc(var(--left) * 1px);
+  top: calc(var(--top) * 1px);
+  width: calc(var(--width) * 1px);
+  height: calc(var(--height) * 1px);
+}

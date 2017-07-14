@@ -18,6 +18,8 @@ import {BindingEngine} from 'aurelia-binding';
 export class PragmaScreenDesigner {
     currentDesigner;
     model;
+    highlightElement;
+
 
     constructor(element, eventAggregator, templatingEngine, inputListener, bindingEngine) {
         this.element = element;
@@ -48,6 +50,12 @@ export class PragmaScreenDesigner {
             inputEventType.click,
             this.selectElementHandler,
             true);
+
+        this.highlightHandler = this.highlight.bind(this);
+        this.highlightEvent = this.eventAggregator.subscribe("design-highlight", this.highlightHandler);
+        this.highlightElement = this.element.querySelector('.designer-highlight');
+
+        this.parentBounds = this.element.getBoundingClientRect();
     }
 
     detached() {
@@ -59,6 +67,10 @@ export class PragmaScreenDesigner {
         if (this.currentDesigner) {
             this.currentDesigner.dispose();
         }
+
+        this.highlightEvent.dispose();
+        this.highlightHandler = null;
+        this.highlightElement = null;
     }
 
     showDesignerForElement(element) {
@@ -86,6 +98,19 @@ export class PragmaScreenDesigner {
 
     selectElement(event) {
         this.showDesignerForElement(event.target);
+        this.highlight(event.target);
     }
 
+    highlight(event) {
+        if(!event) {
+            return this.highlightElement.classList.add("hidden");
+        }
+
+        const bounds = event.getBoundingClientRect();
+        this.highlightElement.classList.remove("hidden");
+        this.highlightElement.style.setProperty('--left', bounds.left - this.parentBounds.left);
+        this.highlightElement.style.setProperty('--top', bounds.top  - this.parentBounds.top);
+        this.highlightElement.style.setProperty('--width', bounds.width);
+        this.highlightElement.style.setProperty('--height', bounds.height);
+    }
 }

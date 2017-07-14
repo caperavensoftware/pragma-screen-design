@@ -65,5 +65,9 @@ export class TabDesigner extends DesignerBase {
                 toIndex: nextIndex,
             })
         }
+
+        requestAnimationFrame(_ => {
+            this.eventAggregator.publish("design-highlight", this.element);
+        });
     }
 }
