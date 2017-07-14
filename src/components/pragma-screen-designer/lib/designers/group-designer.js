@@ -52,11 +52,13 @@ export class GroupDesginer extends DesignerBase {
     }
 
     moveGroup(direction) {
-        const children = Array.from(this.element.parentElement.children);
-        const currentIndex = children.indexOf(this.element);
+        const group = this.element.parentElement;
+
+        const children = Array.from(group.parentElement.children);
+        const currentIndex = children.indexOf(group);
         const nextIndex = currentIndex + direction;
 
-        moveElementOnParent(currentIndex, nextIndex, this.element.parentElement);
+        moveElementOnParent(currentIndex, nextIndex, group.parentElement);
     }
 
     addField() {
