@@ -7,6 +7,7 @@ import {TabsheetDesigner} from './lib/designers/tabsheet-designer';
 import {TabDesigner} from './lib/designers/tab-designer';
 import {TabBodyDesigner} from './lib/designers/tab-body-designer';
 import {GroupDesginer} from './lib/designers/group-designer';
+import {InputCompositeDesigner} from './lib/designers/input-composite-designer';
 
 import {InputListener, inputEventType} from 'pragma-views';
 import {getDesignerKey} from './pragma-designer-keys';
@@ -16,6 +17,7 @@ import {BindingEngine} from 'aurelia-binding';
 @inject(Element, EventAggregator, TemplatingEngine, InputListener, BindingEngine)
 export class PragmaScreenDesigner {
     currentDesigner;
+    model;
 
     constructor(element, eventAggregator, templatingEngine, inputListener, bindingEngine) {
         this.element = element;
@@ -24,6 +26,8 @@ export class PragmaScreenDesigner {
         this.templatingEngine = templatingEngine;
         this.inputListener = inputListener;
         this.bindingEngine = bindingEngine;
+
+        this.model = {};
     }
 
     attached() {
@@ -32,10 +36,11 @@ export class PragmaScreenDesigner {
             ["tabsheet", TabsheetDesigner],
             ["tab", TabDesigner],
             ["tabbody", TabBodyDesigner],
-            ["group", GroupDesginer]
+            ["group", GroupDesginer],
+            ["input-composite", InputCompositeDesigner]
         ]);
 
-        this.showDesignerForElement(this.element.querySelector(".designer-body"));
+        this.showDesignerForElement(this.element.querySelector('[ref="detailsElement"]'));
 
         this.selectElementHandler = this.selectElement.bind(this);
         this.inputListener.addEvent(
@@ -66,6 +71,8 @@ export class PragmaScreenDesigner {
         if (!key) {
             return;
         }
+
+        console.log(key);
 
         if (this.desginerMap.has(key)) {
             if (this.currentDesigner) {

@@ -25,8 +25,10 @@ export class DesignerBase {
         this.eventAggregator.publish("clear-assistant")
     }
 
-    addChildElement(element, context) {
-        this.element.appendChild(element);
+    addChildElement(element, context, target) {
+        const parent = target || this.element;
+
+        parent.appendChild(element);
         this.enhance(element, context);
     }
 

@@ -1,0 +1,39 @@
+<template>
+    <div class="group assist-container">
+        <h2>Field</h2>
+
+        <label for="edtLabel">Label</label>
+        <input id="edtLabel" value.bind="label" class="half-margin-bottom"/>
+
+        <label for="edtField">Field</label>
+        <input id="edtField" value.bind="field" class="half-margin-bottom"/>
+
+        <label for="edtDescriptor">Descriptor</label>
+        <input id="edtDescriptor" value.bind="descriptorField" class="half-margin-bottom"/>
+    </div>
+
+    <div class="group assist-container">
+        <h2>Type</h2>
+
+        <label for="edtType">Input Type</label>
+        <select id="edtType" value.bind="typeValue">
+            <option repeat.for="option of inputOptions" model.bind="option">${option.title}</option>
+        </select>
+    </div>
+
+
+    <div class="group assist-container">
+        <h2>Validation</h2>
+
+        <div class="checkbox-composite half-margin-bottom">
+            <input id="chbRequired" type="checkbox" checked.bind="required" />
+            <label for="chbRequired">Required</label>
+        </div>
+
+        <div class="checkbox-composite half-margin-bottom">
+            <input id="chbReadOnly" type="checkbox" checked.bind="readonly" />
+            <label for="chbReadOnly">Readonly</label>
+        </div>
+    </div>
+
+</template>

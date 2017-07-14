@@ -1,7 +1,7 @@
 export function getDesignerKey(element) {
     console.log(element);
 
-    if (element.classList.contains('designer-body')) {
+    if (element.matches('[ref="detailsElement"]')) {
         return "body";
     }
 
@@ -22,8 +22,8 @@ export function getDesignerKey(element) {
         return 'group';
     }
 
-    if (element.tagName.toLowerCase() == "h2") {
-        return element.parentElement.classList.contains('group') ? 'group' : 'title'
+    if (element.tagName.toLowerCase() == "input-composite") {
+        return 'input-composite';
     }
 
     return null;

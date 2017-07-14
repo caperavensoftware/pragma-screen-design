@@ -15,7 +15,8 @@ export class TabBodyDesigner extends DesignerBase {
     addGroup() {
         const target = getSelectedTabsheetBody(this.element);
         const group = createGroupElement();
-        target.appendChild(group);
+
+        this.addChildElement(group, this, target);
     }
 
 
