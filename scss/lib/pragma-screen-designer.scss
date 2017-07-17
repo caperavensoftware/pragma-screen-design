@@ -60,7 +60,7 @@ pragma-screen-designer {
     @include no-mouse();
   }
 
-  input-composite *, input[type="checkbox"] {
+  .checkbox-composite *, input-composite *, input[type="checkbox"] {
     @include no-mouse();
   }
 
@@ -70,7 +70,7 @@ pragma-screen-designer {
     }
   }
 
-  .group, .group-header, input-composite  {
+  .group, .group-header, input-composite, .checkbox-composite  {
     cursor: pointer;
   }
 }

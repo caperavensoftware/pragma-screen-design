@@ -13,6 +13,10 @@ export function getDesignerKey(element) {
         return "tab";
     }
 
+    if (element.classList.contains('checkbox-composite')) {
+        return 'input-composite';
+    }
+
     if (element.tagName.toLowerCase() == 'pragma-tabsheet') {
         const length = element.querySelectorAll(".tabsheet-bar-item").length;
         return length > 0 ? "tabbody" : 'tabsheet';

@@ -5,40 +5,46 @@ export function createInputFor(label, field, descriptor, inputType, required, re
         return createReadOnly(label, field, descriptor);
     }
 
-    switch(inputType.toLowerCase()) {
-        case 'text': return createInput(label, field, descriptor, required, "text");
-        case 'date': return createInput(label, field, descriptor, required, "date");
-        case 'number': return createInput(label, field, descriptor, required, "number");
+    const it = inputType.toLowerCase();
+
+    switch(it) {
+        case 'text': return createInput(label, field, descriptor, required, it);
+        case 'date': return createInput(label, field, descriptor, required, it);
+        case 'number': return createInput(label, field, descriptor, required, it);
+        case 'boolean': return createBoolean(label, field, descriptor, required, it);
+        case 'memo': return createTextArea(label, field, descriptor, required, it);
     }
 }
 
 function createReadOnly(label, field, descriptor) {
-    const input = createElement("div", {
-        "data-binding-field": field
-    });
+    const input = createElement("div");
     input.innerText = `${field} value`;
 
-    const composite = createElement("input-composite", {
-        "data-binding-field": field,
-        "data-binding-descriptor": descriptor,
-        "data-binding-required": false,
-        "data-binding-readonly": true,
-        "label": label,
-        "descriptor": `${descriptor} value`
-    }, null, null, input);
-
-    return composite;
+    return createInputComposite(label, field, descriptor, false, "text", input);
 }
 
 function createInput(label, field, descriptor, required, type) {
     const input = createElement("input", {
-        "data-binding-field": field,
-        "data-binding-required": required,
         "type": type,
         "value": `${field} value`
     });
 
+    const composite = createInputComposite(label, field, descriptor, required, type, input);
+    return composite;
+}
+
+function createTextArea(label, field, descriptor, required, type) {
+    const input = createElement("textarea", {
+        "value": `${field} value`
+    });
+
+    const composite = createInputComposite(label, field, descriptor, required, type, input);
+    return composite;
+}
+
+function createInputComposite(label, field, descriptor, required, type, child) {
     const composite = createElement("input-composite", {
+        "data-binding-label": label,
         "data-binding-field": field,
         "data-binding-descriptor": descriptor,
         "data-binding-required": required,
@@ -46,11 +52,25 @@ function createInput(label, field, descriptor, required, type) {
         "data-binding-inptType": type,
         "label": label,
         "descriptor": `${descriptor} value`
-    }, null, null, input);
+    }, null, null, child);
 
     if (required == true) {
         composite.setAttribute("required", true);
     }
 
     return composite;
+}
+
+function createBoolean(label, field, descriptor, required, type, child) {
+    const inputElement = createElement("input", {"type": "checkbox"});
+    const labelElement = createElement("label", null, label);
+
+    return createElement("div", {
+        "data-binding-label": label,
+        "data-binding-field": field,
+        "data-binding-descriptor": descriptor,
+        "data-binding-required": required,
+        "data-binding-readonly": false,
+        "data-binding-inptType": type,
+    }, null, ["checkbox-composite", "half-margin-bottom"], [inputElement, labelElement]);
 }
