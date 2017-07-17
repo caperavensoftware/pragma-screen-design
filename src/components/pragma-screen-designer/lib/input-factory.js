@@ -6,7 +6,9 @@ export function createInputFor(label, field, descriptor, inputType, required, re
     }
 
     switch(inputType.toLowerCase()) {
-        case 'text': return createTextInput(label, field, descriptor, required);
+        case 'text': return createInput(label, field, descriptor, required, "text");
+        case 'date': return createInput(label, field, descriptor, required, "date");
+        case 'number': return createInput(label, field, descriptor, required, "number");
     }
 }
 
@@ -28,11 +30,11 @@ function createReadOnly(label, field, descriptor) {
     return composite;
 }
 
-function createTextInput(label, field, descriptor, required) {
+function createInput(label, field, descriptor, required, type) {
     const input = createElement("input", {
         "data-binding-field": field,
         "data-binding-required": required,
-        "type": "text",
+        "type": type,
         "value": `${field} value`
     });
 
@@ -41,6 +43,7 @@ function createTextInput(label, field, descriptor, required) {
         "data-binding-descriptor": descriptor,
         "data-binding-required": required,
         "data-binding-readonly": false,
+        "data-binding-inptType": type,
         "label": label,
         "descriptor": `${descriptor} value`
     }, null, null, input);

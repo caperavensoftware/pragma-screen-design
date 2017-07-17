@@ -74,7 +74,9 @@ export class InputCompositeDesigner extends DesignerBase {
     }
 
     initialize() {
-        this.typeValue = this.inputOptions[0];
+        const inputType = this.element.getAttribute("data-binding-inptType");
+
+        this.typeValue = this.inputOptions.find(item => item.title == inputType);
         this.label = this.element.getAttribute("label");
         this.field = this.element.getAttribute("data-binding-field");
         this.descriptorField = this.element.getAttribute("data-binding-descriptor");
@@ -122,9 +124,11 @@ export class InputCompositeDesigner extends DesignerBase {
         const input = inputSlot.children[0];
         const valueTypes = ["input", "textarea"];
 
-        if (valueTypes.indexOf(input.nodeName.toLowerCase()) > -1) {
-            input.setAttribute("value.bind", newValue);
-            input.value = `${newValue} value`;
+        if (valueTypes.indexOf(input.nodeName.toLowerCase())) {
+            if (this.typeValue.title == "text") {
+                input.setAttribute("value.bind", newValue);
+                input.value = `${newValue} value`;
+            }
         }
         else {
             input.innerText = `${newValue} value`;
