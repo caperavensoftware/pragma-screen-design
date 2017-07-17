@@ -135,16 +135,7 @@ export class InputCompositeDesigner extends DesignerBase {
     }
 
     descriptorFieldChanged(newValue) {
-        const descriptorElement = this.element.querySelector('.descriptor-label');
-        descriptorElement.innerText = `${newValue} value`;
-
-        if ((newValue || "").length > 0) {
-            this.element.setAttribute("descriptor.bind", newValue);
-        }
-        else {
-            this.element.removeAttribute("descriptor.bind");
-        }
-
+        this.element.au["input-composite"].viewModel.descriptor = `${newValue} value`;
         this.element.setAttribute("data-binding-descriptor", newValue);
     }
 
@@ -179,5 +170,17 @@ export class InputCompositeDesigner extends DesignerBase {
     }
 
     typeValueChanged(newValue) {
+        console.log(this.typeValue.title);
+
+        const newElement = createInputFor(this.label, this.field, this.descriptorField, this.typeValue.title, this.required, this.readonly);
+        this.element.parentElement.replaceChild(newElement, this.element);
+        this.element = newElement;
+        this.enhance(this.element, null);
+
+        this.element.setAttribute("data-binding-readonly", newValue);
+
+        requestAnimationFrame(_ => {
+            this.eventAggregator.publish("design-highlight", this.element);
+        });
     }
 }
