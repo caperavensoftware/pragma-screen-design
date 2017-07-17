@@ -1,5 +1,6 @@
 import {DesignerBase} from "./../designer-base";
 import template from './../../assistant/input-composite.html!text';
+import {createInputFor} from "./../input-factory";
 
 export class InputCompositeDesigner extends DesignerBase {
     label;
@@ -73,13 +74,12 @@ export class InputCompositeDesigner extends DesignerBase {
     }
 
     initialize() {
-        this.viewModel = this.element.au["input-composite"].viewModel;
-
-        this.label = this.viewModel.label;
-        this.field = "Code";
-        this.descriptorField = "Description";
-        this.required = false;
-        this.readonly = false;
+        this.typeValue = this.inputOptions[0];
+        this.label = this.element.getAttribute("label");
+        this.field = this.element.getAttribute("data-binding-field");
+        this.descriptorField = this.element.getAttribute("data-binding-descriptor");
+        this.required = (this.element.getAttribute("data-binding-required") || "false").toLowerCase() == "true";
+        this.readonly = (this.element.getAttribute("data-binding-readonly") || "false").toLowerCase() == "true";
 
         this.labelChangedHandler = this.labelChanged.bind(this);
         this.labelChangedSubscription = this.bindingEngine
@@ -113,14 +113,25 @@ export class InputCompositeDesigner extends DesignerBase {
     }
 
     labelChanged(newValue) {
-        this.viewModel.label = newValue;
+        this.element.setAttribute("label", newValue);
+        const element = this.element.querySelector('[ref="labelControl"]').innerText = newValue;
     }
 
     fieldChanged(newValue) {
         const inputSlot = this.element.querySelector("#inputSlot");
         const input = inputSlot.children[0];
-        input.setAttribute("value.bind", newValue);
-        input.value = `${newValue} value`
+        const valueTypes = ["input", "textarea"];
+
+        if (valueTypes.indexOf(input.nodeName.toLowerCase()) > -1) {
+            input.setAttribute("value.bind", newValue);
+            input.value = `${newValue} value`;
+        }
+        else {
+            input.innerText = `${newValue} value`;
+        }
+
+        this.element.setAttribute("data-binding-field", newValue);
+
     }
 
     descriptorFieldChanged(newValue) {
@@ -133,14 +144,38 @@ export class InputCompositeDesigner extends DesignerBase {
         else {
             this.element.removeAttribute("descriptor.bind");
         }
+
+        this.element.setAttribute("data-binding-descriptor", newValue);
     }
 
     requiredChanged(newValue) {
+        if (newValue == true) {
+            this.required = newValue;
+            this.readonly = !newValue;
+        }
 
+        this.element.setAttribute("required", newValue);
+        this.element.setAttribute("data-binding-required", newValue);
+
+        this.element.au["input-composite"].viewModel.required = newValue;
     }
 
     readonlyChanged(newValue) {
+        if (newValue == true) {
+            this.readonly = newValue;
+            this.required = !newValue;
+        }
 
+        const newElement = createInputFor(this.label, this.field, this.descriptorField, this.typeValue.title, this.required, this.readonly);
+        this.element.parentElement.replaceChild(newElement, this.element);
+        this.element = newElement;
+        this.enhance(this.element, null);
+
+        this.element.setAttribute("data-binding-readonly", newValue);
+
+        requestAnimationFrame(_ => {
+            this.eventAggregator.publish("design-highlight", this.element);
+        });
     }
 
     typeValueChanged(newValue) {

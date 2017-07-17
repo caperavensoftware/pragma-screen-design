@@ -16,7 +16,7 @@
         <h2>Type</h2>
 
         <label for="edtType">Input Type</label>
-        <select id="edtType" value.bind="typeValue">
+        <select id="edtType" value.bind="typeValue" disabled.bind="readonly">
             <option repeat.for="option of inputOptions" model.bind="option">${option.title}</option>
         </select>
     </div>
@@ -26,12 +26,12 @@
         <h2>Validation</h2>
 
         <div class="checkbox-composite half-margin-bottom">
-            <input id="chbRequired" type="checkbox" checked.bind="required" />
+            <input id="chbRequired" type="checkbox" checked.bind="required" disabled.bind="readonly"/>
             <label for="chbRequired">Required</label>
         </div>
 
         <div class="checkbox-composite half-margin-bottom">
-            <input id="chbReadOnly" type="checkbox" checked.bind="readonly" />
+            <input id="chbReadOnly" type="checkbox" checked.bind="readonly" disabled.bind="required"/>
             <label for="chbReadOnly">Readonly</label>
         </div>
     </div>

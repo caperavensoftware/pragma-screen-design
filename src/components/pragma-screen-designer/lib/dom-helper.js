@@ -78,20 +78,6 @@ export function moveElementOnParent(currentIndex, nextIndex, parent) {
 
 }
 
-export function createInputComposite() {
-    const input = createElement("input", {
-        "type": "text",
-        "value.bind": "code"
-    });
-
-    const composite = createElement("input-composite", {
-        "label.bind": "label",
-        "descriptor.bind": "description"
-    }, null, null, input);
-
-    return composite;
-}
-
 export function createElement(type, attributes, innerText, classes, children) {
     const element = document.createElement(type);
 

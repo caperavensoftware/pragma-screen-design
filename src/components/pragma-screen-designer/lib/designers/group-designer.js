@@ -1,7 +1,7 @@
 import {DesignerBase} from "./../designer-base";
 import template from './../../assistant/group.html!text';
-import {getInnerText, setInnerText, getParentElemet, moveElementOnParent, createInputComposite} from './../dom-helper';
-import {createInputContext} from './../context-helper';
+import {setInnerText, getParentElemet, moveElementOnParent} from './../dom-helper';
+import {createInputFor} from './../input-factory';
 
 export class GroupDesginer extends DesignerBase {
     title;
@@ -66,9 +66,8 @@ export class GroupDesginer extends DesignerBase {
     }
 
     addField() {
-        const input = createInputComposite();
-        const context = createInputContext();
-        this.addChildElement(input, context);
+        const input = createInputFor("label", "code", "descriptor", "text", false, false);
+        this.addChildElement(input, null);
 
         requestAnimationFrame(_ => {
             this.eventAggregator.publish("design-highlight", this.element);

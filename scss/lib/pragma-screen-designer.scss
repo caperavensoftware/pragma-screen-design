@@ -1,4 +1,8 @@
 pragma-screen-designer {
+  --selection-border-color: #d1335b;
+  --selection-border-width: 2px;
+  --selection-background: rgba(209, 51, 91, 0.1);
+
   display:block;
   position: relative;
   width: 100%;
@@ -77,8 +81,9 @@ pragma-screen-designer {
   --width: 0;
   --height: 0;
 
-  border-width: 1px;
-  border-color: #35C184;
+  background: var(--selection-background);
+  border-width: var(--selection-border-width);
+  border-color: var(--selection-border-color);
   border-style: dotted;
 
   position: absolute;
