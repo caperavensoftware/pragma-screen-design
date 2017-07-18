@@ -43,15 +43,7 @@ export class GroupDesginer extends DesignerBase {
         this.unload();
     }
 
-    moveUp() {
-        this.moveGroup(-1);
-    }
-
-    moveDown() {
-        this.moveGroup(1);
-    }
-
-    moveGroup(direction) {
+    moveItem(direction) {
         const group = this.element.parentElement;
 
         const children = Array.from(group.parentElement.children);

@@ -44,15 +44,7 @@ export class TabDesigner extends DesignerBase {
         this.unload();
     }
 
-    moveLeft() {
-        this.moveTab(-1);
-    }
-
-    moveRight() {
-        this.moveTab(1);
-    }
-
-    moveTab(direction) {
+    moveItem(direction) {
         const children = Array.from(this.element.parentElement.children);
         const currentIndex = children.indexOf(this.element);
         const nextIndex = currentIndex + direction;

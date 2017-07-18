@@ -84,8 +84,6 @@ export class PragmaScreenDesigner {
             return;
         }
 
-        console.log(key);
-
         if (this.desginerMap.has(key)) {
             if (this.currentDesigner) {
                 this.currentDesigner.dispose();

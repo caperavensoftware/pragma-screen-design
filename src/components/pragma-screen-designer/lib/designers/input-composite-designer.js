@@ -77,7 +77,7 @@ export class InputCompositeDesigner extends DesignerBase {
         const inputType = this.element.getAttribute("data-binding-inptType");
 
         this.typeValue = this.inputOptions.find(item => item.title == inputType);
-        this.label = this.element.getAttribute("label");
+        this.label = this.element.getAttribute("data-binding-label");
         this.field = this.element.getAttribute("data-binding-field");
         this.descriptorField = this.element.getAttribute("data-binding-descriptor");
         this.required = (this.element.getAttribute("data-binding-required") || "false").toLowerCase() == "true";
@@ -115,32 +115,43 @@ export class InputCompositeDesigner extends DesignerBase {
     }
 
     labelChanged(newValue) {
-        this.element.setAttribute("label", newValue);
-        const element = this.element.querySelector('[ref="labelControl"]').innerText = newValue;
+        this.element.setAttribute("data-binding-label", newValue);
+
+        if (this.element.nodeName.toLowerCase() == "input-composite") {
+            this.element.setAttribute("label", newValue);
+            this.element.querySelector('[ref="labelControl"]').innerText = newValue;
+        }
+        else {
+            this.element.querySelector('label').innerText = newValue;
+        }
     }
 
     fieldChanged(newValue) {
-        const inputSlot = this.element.querySelector("#inputSlot");
-        const input = inputSlot.children[0];
-        const valueTypes = ["input", "textarea"];
-
-        if (valueTypes.indexOf(input.nodeName.toLowerCase())) {
-            if (this.typeValue.title == "text") {
-                input.setAttribute("value.bind", newValue);
-                input.value = `${newValue} value`;
-            }
-        }
-        else {
-            input.innerText = `${newValue} value`;
-        }
-
         this.element.setAttribute("data-binding-field", newValue);
 
+        if (this.element.tagName.toLowerCase() == "input-composite") {
+            const inputSlot = this.element.querySelector("#inputSlot");
+            const input = inputSlot.children[0];
+            const valueTypes = ["input", "textarea"];
+
+            if (valueTypes.indexOf(input.nodeName.toLowerCase())) {
+                if (this.typeValue.title == "text") {
+                    input.setAttribute("value.bind", newValue);
+                    input.value = `${newValue} value`;
+                }
+            }
+            else {
+                input.innerText = `${newValue} value`;
+            }
+        }
     }
 
     descriptorFieldChanged(newValue) {
-        this.element.au["input-composite"].viewModel.descriptor = `${newValue} value`;
         this.element.setAttribute("data-binding-descriptor", newValue);
+
+        if (this.element.tagName.toLowerCase() == "input-composite") {
+            this.element.au["input-composite"].viewModel.descriptor = `${newValue} value`;
+        }
     }
 
     requiredChanged(newValue) {
@@ -152,7 +163,9 @@ export class InputCompositeDesigner extends DesignerBase {
         this.element.setAttribute("required", newValue);
         this.element.setAttribute("data-binding-required", newValue);
 
-        this.element.au["input-composite"].viewModel.required = newValue;
+        if (this.element.tagName.toLowerCase() == "input-composite") {
+            this.element.au["input-composite"].viewModel.required = newValue;
+        }
     }
 
     readonlyChanged(newValue) {
