@@ -8,8 +8,10 @@
         <label for="edtField">Field</label>
         <input id="edtField" value.bind="field" class="half-margin-bottom"/>
 
-        <label for="edtDescriptor">Descriptor</label>
-        <input id="edtDescriptor" value.bind="descriptorField" class="half-margin-bottom"/>
+        <div if.bind="options.allowDescriptor">
+            <label for="edtDescriptor">Descriptor</label>
+            <input id="edtDescriptor" value.bind="descriptorField" class="half-margin-bottom"/>
+        </div>
     </div>
 
     <div class="group assist-container">

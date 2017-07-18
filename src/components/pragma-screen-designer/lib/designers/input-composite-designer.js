@@ -11,6 +11,8 @@ export class InputCompositeDesigner extends DesignerBase {
     typeValue;
     inputOptions;
 
+    options;
+
     constructor(element, eventAggregator, templateEngine, bindingEngine) {
         super(element, eventAggregator, templateEngine, bindingEngine);
 
@@ -74,6 +76,8 @@ export class InputCompositeDesigner extends DesignerBase {
     }
 
     initialize() {
+        this.options = {};
+
         const inputType = this.element.getAttribute("data-binding-inptType");
 
         this.typeValue = this.inputOptions.find(item => item.title == inputType);
@@ -197,5 +201,7 @@ export class InputCompositeDesigner extends DesignerBase {
         requestAnimationFrame(_ => {
             this.eventAggregator.publish("design-highlight", this.element);
         });
+
+        this.options.allowDescriptor = (newValue || {title: ""}).title.toLowerCase() != "boolean";
     }
 }
