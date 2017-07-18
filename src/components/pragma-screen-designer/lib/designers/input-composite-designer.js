@@ -187,8 +187,6 @@ export class InputCompositeDesigner extends DesignerBase {
     }
 
     typeValueChanged(newValue) {
-        console.log(this.typeValue.title);
-
         const newElement = createInputFor(this.label, this.field, this.descriptorField, this.typeValue.title, this.required, this.readonly);
         this.element.parentElement.replaceChild(newElement, this.element);
         this.element = newElement;

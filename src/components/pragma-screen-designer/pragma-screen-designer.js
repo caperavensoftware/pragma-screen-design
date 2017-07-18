@@ -20,7 +20,6 @@ export class PragmaScreenDesigner {
     model;
     highlightElement;
 
-
     constructor(element, eventAggregator, templatingEngine, inputListener, bindingEngine) {
         this.element = element;
         this.element.id = "designer";
@@ -56,6 +55,9 @@ export class PragmaScreenDesigner {
         this.highlightElement = this.element.querySelector('.designer-highlight');
 
         this.parentBounds = this.element.getBoundingClientRect();
+
+        this.keyUpHandler = this.keyUp.bind(this);
+        document.addEventListener("keydown", this.keyUpHandler);
     }
 
     detached() {
@@ -71,6 +73,16 @@ export class PragmaScreenDesigner {
         this.highlightEvent.dispose();
         this.highlightHandler = null;
         this.highlightElement = null;
+
+        document.removeEventListener("keydown", this.keyUpHandler);
+        this.keyUpHandler = null;
+    }
+
+    keyUp(event) {
+        if (event.key.toLowerCase() == "escape") {
+            this.currentDesigner.dispose();
+            this.currentDesigner = null;
+        }
     }
 
     showDesignerForElement(element) {
