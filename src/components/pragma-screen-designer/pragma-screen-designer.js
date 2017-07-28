@@ -12,6 +12,7 @@ import {InputCompositeDesigner} from './lib/designers/input-composite-designer';
 import {InputListener, inputEventType} from 'pragma-views';
 import {getDesignerKey} from './pragma-designer-keys';
 import {BindingEngine} from 'aurelia-binding';
+import {UpdatePropertiesFromImport} from './lib/dom-helper';
 
 @customElement('pragma-screen-designer')
 @inject(Element, EventAggregator, TemplatingEngine, InputListener, BindingEngine)
@@ -32,6 +33,9 @@ export class PragmaScreenDesigner {
     }
 
     attached() {
+        this.updateAfterImportHandler = this.updateAfterImport.bind(this);
+        this.formUpdateEvent = this.eventAggregator.subscribe("form-updated", this.updateAfterImportHandler);
+
         this.desginerMap = new Map([
             ["body", BodyDesigner],
             ["tabsheet", TabsheetDesigner],
@@ -76,6 +80,10 @@ export class PragmaScreenDesigner {
 
         document.removeEventListener("keydown", this.keyUpHandler);
         this.keyUpHandler = null;
+
+        this.formUpdateEvent.dispose();
+        this.formUpdateEvent = null;
+        this.updateAfterImportHandler = null;
     }
 
     keyUp(event) {
@@ -122,5 +130,9 @@ export class PragmaScreenDesigner {
         this.highlightElement.style.setProperty('--top', bounds.top  - this.parentBounds.top);
         this.highlightElement.style.setProperty('--width', bounds.width);
         this.highlightElement.style.setProperty('--height', bounds.height);
+    }
+
+    updateAfterImport() {
+        UpdatePropertiesFromImport(this.element);
     }
 }

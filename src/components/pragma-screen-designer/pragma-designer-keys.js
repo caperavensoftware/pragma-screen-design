@@ -1,7 +1,7 @@
 export function getDesignerKey(element) {
     console.log(element);
 
-    if (element.matches('[ref="detailsElement"]')) {
+    if (element.classList.contains('form-container')) {
         return "body";
     }
 

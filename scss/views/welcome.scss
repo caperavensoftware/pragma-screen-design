@@ -1,0 +1,28 @@
+@import './../../jspm_packages/npm/pragma-views@0.0.63/scss/lib/variables';
+
+.welcome-layout {
+  display: grid;
+  grid-template-rows: $app-toolbar-height auto;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.designer-layer {
+  grid-row: 1;
+}
+
+.pragma-screen-designer {
+  grid-row: 2;
+}
+
+.designer-main-toolbar {
+  width: 100%;
+  height: $app-toolbar-height;
+  display: flex;
+  align-content: center;
+}
+

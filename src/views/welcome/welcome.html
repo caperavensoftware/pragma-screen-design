@@ -1,5 +1,15 @@
 <template>
-    <pragma-screen-designer>
+    <require from="./../../../../styles/views/welcome.css"></require>
 
-    </pragma-screen-designer>
+    <div class="welcome-layout">
+        <div class="designer-layer">
+            <div class="designer-main-toolbar">
+                <button click.delegate="import()">Import</button>
+                <button click.delegate="export()">Export</button>
+                <button click.delegate="clear()">Clear</button>
+            </div>
+        </div>
+
+        <pragma-screen-designer></pragma-screen-designer>
+    </div>
 </template>

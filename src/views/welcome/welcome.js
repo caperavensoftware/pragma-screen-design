@@ -15,4 +15,22 @@ export class Welcome {
         //     this.eventAggregator.publish("show-assistant", true);
         // }
     }
+
+    import() {
+        this.clear();
+
+        const pragmaform = document.querySelector("pragma-form");
+        pragmaform.au["pragma-form"].viewModel.import();
+    }
+
+    export() {
+        const pragmaform = document.querySelector("pragma-form");
+        pragmaform.au["pragma-form"].viewModel.export();
+    }
+
+    clear() {
+        const pragmaform = document.querySelector("pragma-form");
+        pragmaform.au["pragma-form"].viewModel.clear();
+        pragmaform.querySelector(".form-container").innerHTML = "";
+    }
 }

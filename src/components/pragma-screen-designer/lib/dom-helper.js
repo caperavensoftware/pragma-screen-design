@@ -112,3 +112,62 @@ export function createElement(type, attributes, innerText, classes, children) {
 
     return element;
 }
+
+export function UpdatePropertiesFromImport(element) {
+    updateInputCompositeForDesign(element);
+}
+
+function updateInputCompositeForDesign(element) {
+    const controls = element.querySelectorAll("input-composite");
+
+    for(let control of controls) {
+        const label = control.getAttribute("label");
+        const descriptorField = (control.getAttribute("descriptor.bind") || "").replace("model.", "");
+        const required = control.hasAttribute("required") || control.hasAttribute('required="true"');
+        let readonly = false;
+        let field = "";
+
+        const inputSlot = control.querySelector("#inputSlot");
+        const content = inputSlot.children[0];
+
+        if (content.nodeName == "DIV") {
+            readonly = true;
+        }
+
+        if (content.nodeName == "INPUT") {
+            field = content.getAttribute("value.bind").replace("model.", "");
+        }
+
+        control.setAttribute("data-binding-inptType", getInputType(content));
+        control.setAttribute("data-binding-label", label);
+        control.setAttribute("data-binding-field", field);
+        control.setAttribute("data-binding-descriptor", descriptorField);
+        control.setAttribute("data-binding-required", required);
+        control.setAttribute("data-binding-readonly", readonly);
+
+        content.value = `${field} value`;
+        control.au["input-composite"].viewModel.descriptor = `${descriptorField} value`;
+    }
+}
+
+function getInputType(control) {
+    if (control.nodeName == "INPUT") {
+        const type = control.getAttribute("type");
+
+        if (["text", "date", "number"].indexOf(type) > -1) {
+            return type;
+        }
+
+        if (type == "checkbox") {
+            return "boolean";
+        }
+    }
+
+    if (control.nodeName == "TEXTAREA") {
+        return "memo;"
+    }
+
+    if (control.nodeName == "SELECT") {
+        return "dropdown";
+    }
+}
