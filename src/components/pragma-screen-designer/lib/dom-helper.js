@@ -17,6 +17,10 @@ export function createGroupElement() {
     return createElement("group", {"title": "Group", "expanded": true});
 }
 
+export function createHeading() {
+    return createElement("h3", null, "Heading");
+}
+
 export function getSelectedTabsheetBody(element) {
     let selectedHeaderItem = element.querySelector('.tabsheet-bar-item[aria-selected="true"]');
     if (!selectedHeaderItem) {

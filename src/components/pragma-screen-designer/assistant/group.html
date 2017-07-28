@@ -4,13 +4,14 @@
         <input type="text" value.bind="title"/>
 
         <hr/>
-        <button click.delegate="delete()" disabled.bind="hasTabsheet">Delete</button>
-        <button click.delegate="moveUp()" disabled.bind="hasTabsheet">Move Up</button>
-        <button click.delegate="moveDown()" disabled.bind="hasTabsheet">Move Down</button>
+        <button click.delegate="delete()">Delete</button>
+        <button click.delegate="moveUp()">Move Up</button>
+        <button click.delegate="moveDown()">Move Down</button>
     </div>
 
     <div class="group assist-container">
-        <h2>Fields</h2>
-        <button click.delegate="addField()" disabled.bind="hasTabsheet">Add</button>
+        <h2>Content</h2>
+        <button click.delegate="addField()">Add Fields</button>
+        <button click.delegate="addHeading()">Add Heading</button>
     </div>
 </template>

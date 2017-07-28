@@ -1,6 +1,6 @@
 import {DesignerBase} from "./../designer-base";
 import template from './../../assistant/group.html!text';
-import {setInnerText, getParentElemet, moveElementOnParent} from './../dom-helper';
+import {setInnerText, getParentElemet, moveElementOnParent, createHeading} from './../dom-helper';
 import {createInputFor} from './../input-factory';
 
 export class GroupDesginer extends DesignerBase {
@@ -60,9 +60,10 @@ export class GroupDesginer extends DesignerBase {
     addField() {
         const input = createInputFor("label", "code", "descriptor", "text", false, false);
         this.addChildElement(input, null);
+    }
 
-        requestAnimationFrame(_ => {
-            this.eventAggregator.publish("design-highlight", this.element);
-        });
+    addHeading() {
+        const heading = createHeading();
+        this.addChildElement(heading, this);
     }
 }

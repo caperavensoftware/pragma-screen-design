@@ -1,6 +1,7 @@
 import {DesignerBase} from "./../designer-base";
 import template from './../../assistant/body.html!text';
-import {createTabsheetElement, createGroupElement} from './../dom-helper';
+import {createTabsheetElement, createGroupElement, createHeading} from './../dom-helper';
+import {createInputFor} from './../input-factory';
 
 export class BodyDesigner extends DesignerBase {
     hasTabsheet;
@@ -31,5 +32,15 @@ export class BodyDesigner extends DesignerBase {
     addGroup() {
         const group = createGroupElement();
         this.addChildElement(group, this);
+    }
+
+    addHeading() {
+        const heading = createHeading();
+        this.addChildElement(heading, this);
+    }
+
+    addField() {
+        const input = createInputFor("label", "code", "descriptor", "text", false, false);
+        this.addChildElement(input, null);
     }
 }

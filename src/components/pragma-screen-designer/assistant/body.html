@@ -1,7 +1,9 @@
 <template>
     <div class="group assist-container">
-        <h2>Body</h2>
+        <h2>Content</h2>
         <button click.delegate="addTabsheet()" disabled.bind="hasTabsheet">Add Tabsheet</button>
         <button click.delegate="addGroup()" disabled.bind="hasTabsheet">Add Group</button>
+        <button click.delegate="addHeading()" disabled.bind="hasTabsheet">Add Heading</button>
+        <button click.delegate="addField()" disabled.bind="hasTabsheet">Add Field</button>
     </div>
 </template>
