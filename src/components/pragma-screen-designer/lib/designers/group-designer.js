@@ -60,10 +60,18 @@ export class GroupDesginer extends DesignerBase {
     addField() {
         const input = createInputFor("label", "code", "descriptor", "text", false, false);
         this.addChildElement(input, null);
+
+        requestAnimationFrame(_ => {
+            this.eventAggregator.publish("design-highlight", this.element);
+        });
     }
 
     addHeading() {
         const heading = createHeading();
         this.addChildElement(heading, this);
+
+        requestAnimationFrame(_ => {
+            this.eventAggregator.publish("design-highlight", this.element);
+        });
     }
 }
