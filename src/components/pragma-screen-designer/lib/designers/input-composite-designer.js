@@ -138,7 +138,7 @@ export class InputCompositeDesigner extends DesignerBase {
             const input = inputSlot.children[0];
             const valueTypes = ["input", "textarea"];
 
-            if (valueTypes.indexOf(input.nodeName.toLowerCase())) {
+            if (valueTypes.indexOf(input.nodeName.toLowerCase()) > -1) {
                 if (this.typeValue.title == "text") {
                     input.setAttribute("value.bind", newValue);
                     input.value = `${newValue} value`;
