@@ -8,6 +8,7 @@ import {TabDesigner} from './lib/designers/tab-designer';
 import {TabBodyDesigner} from './lib/designers/tab-body-designer';
 import {GroupDesginer} from './lib/designers/group-designer';
 import {InputCompositeDesigner} from './lib/designers/input-composite-designer';
+import {HeadingDesigner} from './lib/designers/heading-designer';
 
 import {InputListener, inputEventType} from 'pragma-views';
 import {getDesignerKey} from './pragma-designer-keys';
@@ -42,7 +43,8 @@ export class PragmaScreenDesigner {
             ["tab", TabDesigner],
             ["tabbody", TabBodyDesigner],
             ["group", GroupDesginer],
-            ["input-composite", InputCompositeDesigner]
+            ["input-composite", InputCompositeDesigner],
+            ["heading", HeadingDesigner]
         ]);
 
         this.showDesignerForElement(this.element.querySelector('[ref="detailsElement"]'));

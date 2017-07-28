@@ -30,5 +30,9 @@ export function getDesignerKey(element) {
         return 'input-composite';
     }
 
+    if (["h1", "h2", "h3"].indexOf(element.tagName.toLowerCase()) > -1) {
+        return "heading";
+    }
+
     return null;
 }
