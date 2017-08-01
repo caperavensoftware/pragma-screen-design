@@ -93,6 +93,7 @@ export class PragmaScreenDesigner {
             this.currentDesigner.dispose();
             this.currentDesigner = null;
         }
+
         /**
          * Add the following:
          * Up = select item above
