@@ -23,20 +23,21 @@
       "aurelia-pal": "^1.3.0",
       "aurelia-pal-browser": "^1.2.1",
       "aurelia-templating": "^1.4.2",
-      "pragma-views": "^0.0.63"
+      "pragma-views": "^0.0.67"
     },
     "devDependencies": {}
   },
   "devDependencies": {
-    "aurelia-polyfills": "^1.2.1",
     "aurelia-event-aggregator": "^1.0.1",
     "aurelia-framework": "^1.1.2",
     "aurelia-pal-nodejs": "^1.0.0-beta.1.0.0",
+    "aurelia-polyfills": "^1.2.1",
     "babel-core": "^6.24.1",
     "babel-plugin-istanbul": "^4.1.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2017": "^6.24.1",
     "chai": "^3.5.0",
     "istanbul": "^0.4.5",
     "jspm": "^0.16.53",

@@ -93,6 +93,14 @@ export class PragmaScreenDesigner {
             this.currentDesigner.dispose();
             this.currentDesigner = null;
         }
+        /**
+         * Add the following:
+         * Up = select item above
+         * Down = select item below
+         * ctrl + up = move selected item up
+         * ctrl + down = move selected item down
+         * delete = delete selected item
+         */
     }
 
     showDesignerForElement(element) {

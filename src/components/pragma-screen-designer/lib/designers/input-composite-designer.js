@@ -140,8 +140,8 @@ export class InputCompositeDesigner extends DesignerBase {
 
             if (valueTypes.indexOf(input.nodeName.toLowerCase()) > -1) {
                 if (this.typeValue.title == "text") {
-                    input.setAttribute("value.bind", newValue);
                     input.value = `${newValue} value`;
+                    input.setAttribute("value.bind", newValue);
                 }
             }
             else {

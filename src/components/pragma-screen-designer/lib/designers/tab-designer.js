@@ -28,7 +28,7 @@ export class TabDesigner extends DesignerBase {
             .subscribe(this.titleChangedHandler)
     }
 
-    titleChanged(newValue) {
+    titleChanged(newValue, oldValue) {
         this.element.innerText = newValue;
     }
 

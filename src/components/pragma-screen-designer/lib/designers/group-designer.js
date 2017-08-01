@@ -59,7 +59,8 @@ export class GroupDesginer extends DesignerBase {
 
     addField() {
         const input = createInputFor("label", "code", "descriptor", "text", false, false);
-        this.addChildElement(input, null);
+        const parent = this.element.querySelector(".group-body");
+        this.addChildElement(input, null, parent);
 
         requestAnimationFrame(_ => {
             this.eventAggregator.publish("design-highlight", this.element);
@@ -68,7 +69,8 @@ export class GroupDesginer extends DesignerBase {
 
     addHeading() {
         const heading = createHeading();
-        this.addChildElement(heading, this);
+        const parent = this.element.querySelector(".group-body");
+        this.addChildElement(heading, this, parent);
 
         requestAnimationFrame(_ => {
             this.eventAggregator.publish("design-highlight", this.element);
