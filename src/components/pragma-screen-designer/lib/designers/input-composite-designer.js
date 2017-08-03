@@ -36,10 +36,6 @@ export class InputCompositeDesigner extends DesignerBase {
             {
                 id: 4,
                 title: "memo"
-            },
-            {
-                id: 5,
-                title: "dropdown"
             }
         ];
 
