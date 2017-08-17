@@ -7,6 +7,14 @@
                 <button click.delegate="import()">Import</button>
                 <button click.delegate="export()">Export</button>
                 <button click.delegate="clear()">Clear</button>
+
+                <div class="default-padding"></div>
+
+                <select value.bind="selectedTemplateId" class="template-select">
+                    <option repeat.for="template of schema.templates" model.bind="template.id">${template.name}</option>
+                </select>
+
+                <button click.delegate="addTemplate()">Add Template</button>
             </div>
         </div>
 

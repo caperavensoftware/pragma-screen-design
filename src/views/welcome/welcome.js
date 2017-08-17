@@ -1,36 +1,63 @@
-import {inject} from 'aurelia-framework';
+import {inject, bindable} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {isMobile} from 'pragma-views';
+import {isMobile, Schema, TemplateConstructor} from 'pragma-views';
 
-@inject(EventAggregator)
+@inject(EventAggregator, TemplateConstructor)
 export class Welcome {
     eventAggregator;
+    @bindable selectedTemplateId;
 
-    constructor(eventAggregator) {
+    constructor(eventAggregator, templateConstructor) {
         this.eventAggregator = eventAggregator;
+        this.templateConstructor = templateConstructor;
     }
 
     attached() {
-        // if (isMobile) {
-        //     this.eventAggregator.publish("show-assistant", true);
-        // }
+        const formElement = document.querySelector("pragma-form");
+        this.form = formElement.au["pragma-form"].viewModel;
+        this.formContainer = formElement.querySelector(".form-container");
+
+        this.schema = new Schema();
+        this.schema.body.elements = [];
+        const template = this.schema.templates.add();
+        template.name = "Body Template";
+
+        this.form.schema = this.schema;
+        this.schema.body.elements.push({
+            "element": "template",
+            "template": 1
+        });
+
+        this.templateConstructor.jsonObj = this.schema;
     }
 
     import() {
         this.clear();
-
-        const pragmaform = document.querySelector("pragma-form");
-        pragmaform.au["pragma-form"].viewModel.import();
+        this.form.import();
     }
 
     export() {
-        const pragmaform = document.querySelector("pragma-form");
-        pragmaform.au["pragma-form"].viewModel.export();
+        this.form.export();
     }
 
     clear() {
-        const pragmaform = document.querySelector("pragma-form");
-        pragmaform.au["pragma-form"].viewModel.clear();
-        pragmaform.querySelector(".form-container").innerHTML = "";
+        this.formContainer.innerHTML = "";
+        this.form.clear();
+    }
+
+    addTemplate() {
+        const template = this.schema.templates.add();
+        this.selectedTemplateId = template.id;
+        this.form.loadTemplates();
+    }
+
+    selectedTemplateIdChanged(newValue, oldValue) {
+        if (oldValue != null) {
+            const template = this.schema.templates.find(item => item.id == oldValue);
+            this.templateConstructor.domToTemplate(this.formContainer, template);
+            this.form.loadTemplates();
+        }
+
+        this.form.showSchemaTemplate(newValue);
     }
 }
