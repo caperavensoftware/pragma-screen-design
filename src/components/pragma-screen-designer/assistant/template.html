@@ -1,0 +1,12 @@
+<template>
+    <div class="group assist-container">
+        <h2>Template</h2>
+
+        <div>${title}</div>
+        <select value.bind="selectedTemplateId">
+            <option repeat.for="item of schema.templates" value.bind="item.id">${item.name}</option>
+        </select>
+
+        <div>${selectedTemplateId}</div>
+    </div>
+</template>

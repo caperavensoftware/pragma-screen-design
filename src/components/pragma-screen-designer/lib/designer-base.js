@@ -1,11 +1,12 @@
 import {moveElementOnParent} from './dom-helper';
 
 export class DesignerBase {
-    constructor(element, eventAggregator, templateEngine, bindingEngine) {
+    constructor(element, eventAggregator, templateEngine, bindingEngine, observerLocator) {
         this.element = element;
         this.eventAggregator = eventAggregator;
         this.templateEngine = templateEngine;
         this.bindingEngine = bindingEngine;
+        this.observerLocator = observerLocator;
     }
 
     dispose() {

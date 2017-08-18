@@ -34,5 +34,8 @@ export function getDesignerKey(element) {
         return "heading";
     }
 
+    if (element.dataset.template !== undefined) {
+        return "template"
+    }
     return null;
 }

@@ -1,4 +1,5 @@
 import {customElement, inject} from 'aurelia-framework';
+import {ObserverLocator} from 'aurelia-binding';
 import {TemplatingEngine} from 'aurelia-templating';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
@@ -9,6 +10,7 @@ import {TabBodyDesigner} from './lib/designers/tab-body-designer';
 import {GroupDesginer} from './lib/designers/group-designer';
 import {InputCompositeDesigner} from './lib/designers/input-composite-designer';
 import {HeadingDesigner} from './lib/designers/heading-designer';
+import {TemplateDesigner} from './lib/designers/template-designer';
 
 import {InputListener, inputEventType} from 'pragma-views';
 import {getDesignerKey} from './pragma-designer-keys';
@@ -16,19 +18,20 @@ import {BindingEngine} from 'aurelia-binding';
 import {UpdatePropertiesFromImport} from './lib/dom-helper';
 
 @customElement('pragma-screen-designer')
-@inject(Element, EventAggregator, TemplatingEngine, InputListener, BindingEngine)
+@inject(Element, EventAggregator, TemplatingEngine, InputListener, BindingEngine, ObserverLocator)
 export class PragmaScreenDesigner {
     currentDesigner;
     model;
     highlightElement;
 
-    constructor(element, eventAggregator, templatingEngine, inputListener, bindingEngine) {
+    constructor(element, eventAggregator, templatingEngine, inputListener, bindingEngine, observerLocator) {
         this.element = element;
         this.element.id = "designer";
         this.eventAggregator = eventAggregator;
         this.templatingEngine = templatingEngine;
         this.inputListener = inputListener;
         this.bindingEngine = bindingEngine;
+        this.observerLocator = observerLocator;
 
         this.model = {};
     }
@@ -44,7 +47,8 @@ export class PragmaScreenDesigner {
             ["tabbody", TabBodyDesigner],
             ["group", GroupDesginer],
             ["input-composite", InputCompositeDesigner],
-            ["heading", HeadingDesigner]
+            ["heading", HeadingDesigner],
+            ["template", TemplateDesigner]
         ]);
 
         this.showDesignerForElement(this.element.querySelector('[ref="detailsElement"]'));
@@ -121,7 +125,7 @@ export class PragmaScreenDesigner {
             }
 
             const type = this.desginerMap.get(key);
-            this.currentDesigner = new type(element, this.eventAggregator, this.templatingEngine, this.bindingEngine);
+            this.currentDesigner = new type(element, this.eventAggregator, this.templatingEngine, this.bindingEngine, this.observerLocator);
         }
     }
 

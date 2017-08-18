@@ -16,6 +16,11 @@ export function createInputFor(label, field, descriptor, inputType, required, re
     }
 }
 
+export function createTemplate() {
+    const container = createElement("div", {"data-template": -1}, "Please select a template to use", ["card", "default-padding"]);
+    return container;
+}
+
 function createReadOnly(label, field, descriptor) {
     const input = createElement("div");
     input.innerText = `${field} value`;

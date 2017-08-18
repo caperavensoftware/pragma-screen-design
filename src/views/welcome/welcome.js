@@ -29,6 +29,7 @@ export class Welcome {
         });
 
         this.templateConstructor.jsonObj = this.schema;
+        this.eventAggregator.publish("design-highlight", null);
     }
 
     import() {
@@ -59,5 +60,6 @@ export class Welcome {
         }
 
         this.form.showSchemaTemplate(newValue);
+        this.eventAggregator.publish("design-highlight", null);
     }
 }

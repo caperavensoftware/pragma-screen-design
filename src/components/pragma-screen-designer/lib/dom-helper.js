@@ -175,3 +175,15 @@ function getInputType(control) {
         return "dropdown";
     }
 }
+
+export function getPragmaFormParent(element) {
+    if (element == null || element == undefined) {
+        return null;
+    }
+
+    if (element.tagName.toLowerCase() == "pragma-form") {
+        return element;
+    }
+
+    return getPragmaFormParent(element.parentElement);
+}
