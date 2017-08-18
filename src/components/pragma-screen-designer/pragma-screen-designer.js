@@ -94,8 +94,7 @@ export class PragmaScreenDesigner {
 
     keyUp(event) {
         if (event.key.toLowerCase() == "escape") {
-            this.currentDesigner.dispose();
-            this.currentDesigner = null;
+            this.clearSelection();
         }
 
         /**
@@ -136,7 +135,7 @@ export class PragmaScreenDesigner {
 
     highlight(event) {
         if(!event) {
-            return this.highlightElement.classList.add("hidden");
+            return this.clearSelection();
         }
 
         const bounds = event.getBoundingClientRect();
@@ -145,6 +144,15 @@ export class PragmaScreenDesigner {
         this.highlightElement.style.setProperty('--top', bounds.top  - this.parentBounds.top);
         this.highlightElement.style.setProperty('--width', bounds.width);
         this.highlightElement.style.setProperty('--height', bounds.height);
+    }
+
+    clearSelection() {
+        if (this.currentDesigner != null && this.currentDesigner != undefined) {
+            this.currentDesigner.dispose();
+            this.currentDesigner = null;
+        }
+
+        return this.highlightElement.classList.add("hidden");
     }
 
     updateAfterImport() {

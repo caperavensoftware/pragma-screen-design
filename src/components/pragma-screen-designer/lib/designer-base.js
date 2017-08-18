@@ -26,7 +26,6 @@ export class DesignerBase {
 
     unload() {
         this.eventAggregator.publish("clear-assistant");
-        this.eventAggregator.publish("design-highlight", null);
     }
 
     addChildElement(element, context, target) {

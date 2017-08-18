@@ -62,7 +62,6 @@ export class Welcome {
 
         this.form.showSchemaTemplate(newValue);
         this.eventAggregator.publish("design-highlight", null);
-
     }
 
     showTemplate(event) {
