@@ -30,8 +30,8 @@ export class TemplateDesigner extends DesignerBase {
     }
 
     initialize() {
-        const form = getPragmaFormParent(this.element).au["pragma-form"].viewModel;
-        this.schema = form.schema;
+        this.form = getPragmaFormParent(this.element).au["pragma-form"].viewModel;
+        this.schema = this.form.schema;
     }
 
     selectedTemplateIdChanged(newValue) {
@@ -53,5 +53,11 @@ export class TemplateDesigner extends DesignerBase {
         }
 
         this.eventAggregator.publish("design-highlight", this.element);
+    }
+
+    edit() {
+        if (this.selectedTemplateId != 1) {
+            this.eventAggregator.publish("show-template", this.selectedTemplateId);
+        }
     }
 }

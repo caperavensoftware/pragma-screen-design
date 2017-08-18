@@ -6,7 +6,11 @@
         <select value.bind="selectedTemplateId">
             <option repeat.for="item of schema.templates" value.bind="item.id">${item.name}</option>
         </select>
-
-        <div>${selectedTemplateId}</div>
+        <div class="half-padding"></div>
+        <button click.delegate="edit()">Edit</button>
+        <div class="half-padding"></div>
+        <button click.delegate="delete()">Delete</button>
+        <button click.delegate="moveUp()">Move Up</button>
+        <button click.delegate="moveDown()">Move Down</button>
     </div>
 </template>

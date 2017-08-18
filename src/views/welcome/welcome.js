@@ -30,6 +30,7 @@ export class Welcome {
 
         this.templateConstructor.jsonObj = this.schema;
         this.eventAggregator.publish("design-highlight", null);
+        this.eventAggregator.subscribe("show-template", this.showTemplate.bind(this));
     }
 
     import() {
@@ -61,5 +62,10 @@ export class Welcome {
 
         this.form.showSchemaTemplate(newValue);
         this.eventAggregator.publish("design-highlight", null);
+
+    }
+
+    showTemplate(event) {
+        this.selectedTemplateId = Number(event);
     }
 }
