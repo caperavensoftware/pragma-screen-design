@@ -117,7 +117,7 @@ export function createElement(type, attributes, innerText, classes, children) {
     return element;
 }
 
-export function UpdatePropertiesFromImport(element) {
+export function updatePropertiesFromImport(element) {
     updateInputCompositeForDesign(element);
 }
 
@@ -142,7 +142,7 @@ function updateInputCompositeForDesign(element) {
             field = content.getAttribute("value.bind").replace("model.", "");
         }
 
-        control.setAttribute("data-binding-inptType", getInputType(content));
+        control.setAttribute("data-binding-inputType", getInputType(content));
         control.setAttribute("data-binding-label", label);
         control.setAttribute("data-binding-field", field);
         control.setAttribute("data-binding-descriptor", descriptorField);

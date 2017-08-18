@@ -15,7 +15,7 @@ import {TemplateDesigner} from './lib/designers/template-designer';
 import {InputListener, inputEventType} from 'pragma-views';
 import {getDesignerKey} from './pragma-designer-keys';
 import {BindingEngine} from 'aurelia-binding';
-import {UpdatePropertiesFromImport} from './lib/dom-helper';
+import {updatePropertiesFromImport} from './lib/dom-helper';
 
 @customElement('pragma-screen-designer')
 @inject(Element, EventAggregator, TemplatingEngine, InputListener, BindingEngine, ObserverLocator)
@@ -148,6 +148,6 @@ export class PragmaScreenDesigner {
     }
 
     updateAfterImport() {
-        UpdatePropertiesFromImport(this.element);
+        updatePropertiesFromImport(this.element);
     }
 }

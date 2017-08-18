@@ -54,7 +54,7 @@ function createInputComposite(label, field, descriptor, required, type, child) {
         "data-binding-descriptor": descriptor,
         "data-binding-required": required,
         "data-binding-readonly": false,
-        "data-binding-inptType": type,
+        "data-binding-inputType": type,
         "label": label,
         "descriptor": `${descriptor} value`
     }, null, null, child);
@@ -76,6 +76,6 @@ function createBoolean(label, field, descriptor, required, type, child) {
         "data-binding-descriptor": descriptor,
         "data-binding-required": required,
         "data-binding-readonly": false,
-        "data-binding-inptType": type,
+        "data-binding-inputType": type,
     }, null, ["checkbox-composite", "half-margin-bottom"], [inputElement, labelElement]);
 }

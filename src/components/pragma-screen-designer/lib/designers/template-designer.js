@@ -2,6 +2,7 @@ import {DesignerBase} from "./../designer-base";
 import template from './../../assistant/template.html!text';
 import {getPragmaFormParent} from './../../lib/dom-helper';
 import {TemplateParser} from 'pragma-views';
+import {updatePropertiesFromImport} from './../dom-helper';
 
 export class TemplateDesigner extends DesignerBase {
     schema;
@@ -44,10 +45,13 @@ export class TemplateDesigner extends DesignerBase {
             const html = this.templateParser.parseElements(template.elements);
             this.element.innerHTML = html;
             this.enhance(this.element, null);
+            updatePropertiesFromImport(this.element);
+            this.enhance(this.element, null);
+
+            this.element.classList.remove("card");
+            this.element.classList.remove("default-padding");
         }
 
-        this.element.classList.remove("card");
-        this.element.classList.remove("default-padding");
         this.eventAggregator.publish("design-highlight", this.element);
     }
 }

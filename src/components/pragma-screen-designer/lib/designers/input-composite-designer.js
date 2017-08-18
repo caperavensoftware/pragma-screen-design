@@ -74,7 +74,7 @@ export class InputCompositeDesigner extends DesignerBase {
     initialize() {
         this.options = {};
 
-        const inputType = this.element.getAttribute("data-binding-inptType");
+        const inputType = this.element.getAttribute("data-binding-inputType");
 
         this.typeValue = this.inputOptions.find(item => item.title == inputType);
         this.label = this.element.getAttribute("data-binding-label");
