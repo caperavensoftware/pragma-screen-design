@@ -118,7 +118,7 @@ export function createElement(type, attributes, innerText, classes, children) {
 }
 
 export function updatePropertiesFromImport(element) {
-    updateInputCompositeForDesign(element);
+    return updateInputCompositeForDesign(element);
 }
 
 function updateInputCompositeForDesign(element) {
@@ -152,6 +152,8 @@ function updateInputCompositeForDesign(element) {
         content.value = `${field} value`;
         control.au["input-composite"].viewModel.descriptor = `${descriptorField} value`;
     }
+
+    return controls;
 }
 
 function getInputType(control) {

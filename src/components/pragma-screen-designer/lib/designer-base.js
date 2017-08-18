@@ -45,6 +45,7 @@ export class DesignerBase {
     delete() {
         this.element.parentElement.removeChild(this.element);
         this.unload();
+        this.eventAggregator.publish("design-highlight", null);
     }
 
     moveUp() {

@@ -42,14 +42,20 @@ export class TemplateDesigner extends DesignerBase {
         this.element.dataset.template = newValue;
         const template = this.schema.templates.find(item => item.id == newValue);
         if (template) {
-            const html = this.templateParser.parseElements(template.elements);
-            this.element.innerHTML = html;
-            this.enhance(this.element, null);
-            updatePropertiesFromImport(this.element);
-            this.enhance(this.element, null);
+            this.element.innerHTML = `Template: ${template.name}`;
 
-            this.element.classList.remove("card");
-            this.element.classList.remove("default-padding");
+            // const html = this.templateParser.parseElements(template.elements);
+            // this.element.innerHTML = html;
+            // this.enhance(this.element, null);
+            //
+            // const controls = updatePropertiesFromImport(this.element);
+            //
+            // for(let control of controls) {
+            //     this.enhance(control, null);
+            // }
+            //
+            // this.element.classList.remove("card");
+            // this.element.classList.remove("default-padding");
         }
 
         this.eventAggregator.publish("design-highlight", this.element);
