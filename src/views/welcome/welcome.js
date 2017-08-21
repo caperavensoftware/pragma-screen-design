@@ -58,8 +58,6 @@ export class Welcome {
             const template = this.schema.templates.find(item => item.id == oldValue);
             this.templateConstructor.domToTemplate(this.formContainer, template);
 
-console.log(JSON.stringify(template, null, 4));
-
             this.form.loadTemplates();
         }
 
