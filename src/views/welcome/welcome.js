@@ -6,6 +6,7 @@ import {isMobile, Schema, TemplateConstructor} from 'pragma-views';
 export class Welcome {
     eventAggregator;
     @bindable selectedTemplateId;
+    @bindable showDataSources;
 
     constructor(eventAggregator, templateConstructor) {
         this.eventAggregator = eventAggregator;
@@ -16,6 +17,7 @@ export class Welcome {
         const formElement = document.querySelector("pragma-form");
         this.form = formElement.au["pragma-form"].viewModel;
         this.formContainer = formElement.querySelector(".form-container");
+        this.designer = document.querySelector("pragma-screen-designer").au["pragma-screen-designer"].viewModel;
 
         this.schema = new Schema();
         this.schema.body.elements = [];
@@ -31,6 +33,8 @@ export class Welcome {
         this.templateConstructor.jsonObj = this.schema;
         this.eventAggregator.publish("design-highlight", null);
         this.eventAggregator.subscribe("show-template", this.showTemplate.bind(this));
+
+        this.showDataSources = false;
     }
 
     import() {
@@ -67,5 +71,10 @@ export class Welcome {
 
     showTemplate(event) {
         this.selectedTemplateId = Number(event);
+    }
+
+    showDataSourcesChanged(newValue) {
+        this.designer.showDataSources = newValue;
+        console.log(newValue);
     }
 }

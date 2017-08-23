@@ -23,6 +23,8 @@ export class PragmaScreenDesigner {
     currentDesigner;
     model;
     highlightElement;
+    form;
+    showDataSources;
 
     constructor(element, eventAggregator, templatingEngine, inputListener, bindingEngine, observerLocator) {
         this.element = element;
@@ -32,6 +34,7 @@ export class PragmaScreenDesigner {
         this.inputListener = inputListener;
         this.bindingEngine = bindingEngine;
         this.observerLocator = observerLocator;
+        this.showDataSources = false;
 
         this.model = {};
     }
@@ -68,6 +71,8 @@ export class PragmaScreenDesigner {
 
         this.keyUpHandler = this.keyUp.bind(this);
         document.addEventListener("keydown", this.keyUpHandler);
+
+        this.form = this.element.querySelector("pragma-form");
     }
 
     detached() {
@@ -90,6 +95,8 @@ export class PragmaScreenDesigner {
         this.formUpdateEvent.dispose();
         this.formUpdateEvent = null;
         this.updateAfterImportHandler = null;
+
+        this.form = null;
     }
 
     keyUp(event) {

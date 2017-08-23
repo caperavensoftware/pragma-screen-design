@@ -1,9 +1,24 @@
 <template>
     <require from="./../icons/icons.html"></require>
 
-    <pragma-form model.two-way="model"></pragma-form>
+    <div if.bind="!showDataSources">
+        <pragma-form model.two-way="model"></pragma-form>
 
-    <div class="selection-layer">
-        <div class="designer-highlight"></div>
+        <div class="selection-layer">
+            <div class="designer-highlight"></div>
+        </div>
+    </div>
+
+    <div if.bind="showDataSources">
+        <master-detail>
+            <div slot="master">
+                <ul selectable="selected-id: selectedDataSource">
+                </ul>
+            </div>
+
+            <div slot="detail">
+                
+            </div>
+        </master-detail>
     </div>
 </template>
